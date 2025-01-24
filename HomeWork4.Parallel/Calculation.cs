@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 
 namespace HomeWork4.ParallelSum;
 internal class Calculation
@@ -37,6 +38,17 @@ internal class Calculation
         return sum;
     }
 
-   
+    /// <summary>
+    /// Расчет суммы коллекции при помощи PLINQ
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <returns>Возврат суммы</returns>
+    public static int LinqSum(ICollection<int> list)
+    {
+        return list.AsParallel().Sum();
+    }
+
+
 }
 

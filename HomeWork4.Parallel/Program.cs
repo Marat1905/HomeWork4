@@ -14,6 +14,7 @@
 
                var sequentialSum = Calculation.SequentialSum<int>(list);
                 var parallelSum = Calculation.ParallelSum<int>(list);
+                var linqSum = Calculation.LinqSum(list);
             }
         }
     }
