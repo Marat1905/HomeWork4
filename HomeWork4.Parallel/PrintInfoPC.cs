@@ -1,4 +1,4 @@
-﻿namespace HomeWork4.Parallel
+﻿namespace HomeWork4.ParallelSum
 {
     public static class PrintInfoPC
     {

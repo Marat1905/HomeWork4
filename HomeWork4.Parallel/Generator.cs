@@ -1,4 +1,4 @@
-﻿namespace HomeWork4.Parallel;
+﻿namespace HomeWork4.ParallelSum;
 public class Generator
 {
     /// <summary>Генератор коллекции с заполнением случайными числами </summary>

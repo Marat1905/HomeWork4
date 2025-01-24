@@ -1,4 +1,4 @@
-﻿namespace HomeWork4.Parallel
+﻿namespace HomeWork4.ParallelSum
 {
     internal class Program
     {
@@ -12,7 +12,8 @@
             { 
                 var list = Generator.GenerateList(i).ToList();
 
-               var sum = Calculation.SequentialSum<int>(list);
+               var sequentialSum = Calculation.SequentialSum<int>(list);
+                var parallelSum = Calculation.ParallelSum<int>(list);
             }
         }
     }
