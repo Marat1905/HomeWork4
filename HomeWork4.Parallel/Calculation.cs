@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace HomeWork4.Parallel;
+namespace HomeWork4.ParallelSum;
 internal class Calculation
 {
 
@@ -17,5 +17,26 @@ internal class Calculation
         }
         return sum;
     }
+
+    /// <summary>
+    /// Расчет суммы коллекции параллельно
+    /// </summary>
+    /// <typeparam name="T">Тип</typeparam>
+    /// <param name="list">Коллекция</param>
+    /// <returns>Возврат суммы</returns>
+    public static T ParallelSum<T>(ICollection<T> list) where T : struct, INumber<T>
+    {
+        T sum = default;
+        object _lock = new object();
+
+        Parallel.ForEach<T>(list,
+            Sum =>
+            {
+                lock (_lock) { sum += Sum; };
+            });
+        return sum;
+    }
+
+   
 }
 
