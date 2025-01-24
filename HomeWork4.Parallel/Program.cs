@@ -4,7 +4,16 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            PrintInfoPC.PrintSystemInfo();
+
+            List<int> collectionSizes = [100_000, 1_000_000, 10_000_000];
+
+            foreach (int i in collectionSizes) 
+            { 
+                var list = Generator.GenerateList(i).ToList();
+
+               var sum = Calculation.SequentialSum<int>(list);
+            }
         }
     }
 }
