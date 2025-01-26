@@ -9,14 +9,17 @@
             List<int> collectionSizes = [100_000, 1_000_000, 10_000_000];
 
             foreach (int i in collectionSizes) 
-            { 
+            {
+                Logger.WriteTitle($"_______________Расчет коллекции с {i.ToString("0,0")} записями_______________");
+
                 var list = Generator.GenerateList(i).ToList();
+                TimingControl.MeasureTime(() => Calculation.SequentialSum(list), "Расчет суммы коллекции последовательно");
 
-               var sequentialSum = Calculation.SequentialSum<int>(list);
-                var parallelSum = Calculation.ParallelSum<int>(list);
-                var linqSum = Calculation.LinqSum(list);
+                TimingControl.MeasureTime(() => Calculation.ParallelSum(list), "Расчет суммы коллекции параллельно");
 
-                var threadSum = Calculation.ThreadSum(list,10);
+                TimingControl.MeasureTime(() => Calculation.LinqSum(list), "Расчет суммы коллекции при помощи PLINQ");
+
+                TimingControl.MeasureTime(() => Calculation.ThreadSum(list, 10), "Расчет суммы коллекции при помощи потоков");
             }
         }
     }
