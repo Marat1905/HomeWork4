@@ -98,7 +98,7 @@ internal static class Calculation
     /// <param name="list">исходная коллекция</param>
     /// <param name="threadSize">Количество потоков</param>
     /// <returns>Разбитая коллекция</returns>
-    public static List<List<int>> SubList(ICollection<int> list, int threadSize)
+    public static List<List<T>> SubList<T>(ICollection<T> list, int threadSize)
     {
         var listRange = list.Count();
 
@@ -109,21 +109,22 @@ internal static class Calculation
         }
         var listSub = listRange / threadSize;
 
-        List<List<int>> lists = new List<List<int>>();
+        List<List<T>> lists = new List<List<T>>();
         for (int i = 0; i < threadSize; i++)
         {
             if (mod != 0)
             {
-                lists.Add(Slice(list, i * listSub, listSub * (i + 1)));
-                mod--;
+                lists.Add(Slice<T>(list, i * listSub, listSub * (i + 1)));
+                --mod;
             }
             else
-                lists.Add(Slice(list, i * listSub, listSub * (i + 1) - 1));
+                lists.Add(Slice<T>(list, i * listSub, listSub * (i + 1) - 1));
 
         }
         return lists;
     }
-    
+
+
     /// <summary>
     /// Разбиение исходной коллекции
     /// </summary>
@@ -131,10 +132,10 @@ internal static class Calculation
     /// <param name="startIndex">Начало</param>
     /// <param name="endIndex">Конец</param>
     /// <returns>Часть коллекции</returns>
-    public static List<int> Slice(ICollection<int> inputList, int startIndex, int endIndex)
+    public static List<T> Slice<T>(ICollection<T> inputList, int startIndex, int endIndex)
     {
         int elementCount = endIndex - startIndex + 1;
-        List<int> list = inputList.Skip(startIndex).Take(elementCount).ToList();
+        List<T> list = inputList.Skip(startIndex).Take(elementCount).ToList();
         return list;
     }
 }
